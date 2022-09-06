@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const connectDB=mongoose.connect(
-    "mongodb+srv://mango:mommy@cluster0.dxijt7v.mongodb.net/?retryWrites=true&w=majority",
+    env.process.CONNECT_URL,
     {},
     (err:mongoose.CallbackError)=>{
     if(err)

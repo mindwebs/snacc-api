@@ -1,11 +1,30 @@
-interface userInterface {
+import { Document } from "mongoose";
+
+export interface userInterface extends Document {
     name: string,
     email: string,
     password: string,
     room: number,
     whatsapp: string,
     collegeId: number,
-    // add more as you need
+    
 }
 
-export default userInterface;
+export interface CreateUserInterface {
+    name: string,
+    email: string,
+    password: string,
+    room: number,
+    whatsapp: string,
+    collegeId: number,
+    
+}
+
+export interface UpdateUserInterface {
+    name: string,
+    email: string,
+    password: string,
+    room: number,
+    whatsapp: string,
+    
+}

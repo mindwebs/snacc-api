@@ -61,7 +61,7 @@ export const Delete=async(request: express.Request, reponse: express.Response)=>
         const user_id:mongoose.Types.ObjectId=new mongoose.Types.ObjectId(request.body.user_id)
         const user=await userService._deleteUser(user_id)
         reponse.status(200).json({
-            "message": "Fetch success",
+            "message": "delete success",
             user,
         })
 

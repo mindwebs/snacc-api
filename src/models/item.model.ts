@@ -12,9 +12,18 @@ const itemSchema: mongoose.Schema<itemInterface>= new mongoose.Schema({
            type: Number,
            required: true
     },
+
+    cost:{
+       type: Number,
+       required: true
+     },
      
     itemId:{
            type: Number,
            required: true
     },
 })
+
+const Item: mongoose.Model<itemInterface> = mongoose.model("Item", itemSchema);
+
+export default Item;

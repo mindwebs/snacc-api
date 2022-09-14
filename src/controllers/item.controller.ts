@@ -71,3 +71,19 @@ export const DeleteItem=async(request: express.Request, reponse: express.Respons
         });
     }
 };
+export const AvailableItems=async(request: express.Request, reponse: express.Response)=>{
+    try{
+        
+        const item=await itemService._availableItem()
+        reponse.status(200).json({
+            "message": "available items successful",
+            item,
+        })
+
+    }catch(err:unknown){
+        reponse.status(500).json({
+            "message":"Internal Server Error",
+            "error": err,
+        });
+    }
+};

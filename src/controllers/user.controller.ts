@@ -75,6 +75,11 @@ export const Delete=async(request: express.Request, reponse: express.Response)=>
 
 export const FetchAll=async(request: express.Request, reponse: express.Response)=>{
     try{
+        const user=await userService._fetchAllUser()
+        reponse.status(200).json({
+            "message": "delete success",
+            user,
+        })
 
     }catch(err:unknown){
         reponse.status(500).json({

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const connectDB=mongoose.connect(
-    env.process.CONNECT_URL,
+    String(process.env.CONNECT_URL),
     {},
     (err:mongoose.CallbackError)=>{
     if(err)

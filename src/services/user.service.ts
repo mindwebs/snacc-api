@@ -21,3 +21,7 @@ export const _deleteUser = async (user_id: mongoose.Types.ObjectId) => {
     return await User.deleteOne(user_id);
     
 }
+export const _fetchAllUser = async () => {
+    return await User.find({});
+    
+}

@@ -21,3 +21,6 @@ export const _deleteItem = async (item_id: mongoose.Types.ObjectId) => {
     return await Item.deleteOne(item_id);
     
 }
+export const _availableItem = async () => {
+    return await Item.find({ quantity: {$gt: 0}});
+};

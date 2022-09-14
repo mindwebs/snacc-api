@@ -8,8 +8,13 @@ export const _createUser = async (user_dto: CreateUserInterface) => {
 };
 
 export const _fetchUser = async (user_id: mongoose.Types.ObjectId) => {
-    return await User.findOne(user_id);
+    return await User.findOne({ _id: user_id });
 };
+
+export const _fetchUserByEmail = async (email: string) => {
+    return await User.findOne({ email });
+};
+
 export const _updateUser = async (
     id: mongoose.Types.ObjectId,
     dto: UpdateUserInterface

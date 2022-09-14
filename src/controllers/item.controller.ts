@@ -1,15 +1,14 @@
-import express from "express";
-import { copyFileSync } from "fs";
+import { Request, Response } from "express";
 import mongoose from "mongoose";
 import { CreateItemInterface } from "../interfaces/item.interface";
 import { UpdateItemInterface } from "../interfaces/item.interface";
 import * as itemService from "../services/item.service";
 export const RegisterNewItem = async (
-    request: express.Request,
-    reponse: express.Response
+    req: Request,
+    reponse: Response
 ) => {
     try {
-        const item_dto: CreateItemInterface = { ...request.body };
+        const item_dto: CreateItemInterface = { ...req.body };
         const item = await itemService._createItem(item_dto);
         reponse.status(200).json({
             message: "creation success",
@@ -24,12 +23,12 @@ export const RegisterNewItem = async (
 };
 
 export const FetchItem = async (
-    request: express.Request,
-    reponse: express.Response
+    req: Request,
+    reponse: Response
 ) => {
     try {
         const item_id: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(
-            request.body.item_id
+            req.body.item_id
         );
         const item = await itemService._fetchItem(item_id);
         reponse.status(200).json({
@@ -45,14 +44,14 @@ export const FetchItem = async (
 };
 
 export const UpdateItem = async (
-    request: express.Request,
-    reponse: express.Response
+    req: Request,
+    reponse: Response
 ) => {
     try {
         const item_id: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(
-            request.body.item_id
+            req.body.item_id
         );
-        const item_dto: UpdateItemInterface = { ...request.body };
+        const item_dto: UpdateItemInterface = { ...req.body };
         const item = await itemService._updateItem(item_id, item_dto);
         reponse.status(200).json({
             message: "Update success",
@@ -66,12 +65,12 @@ export const UpdateItem = async (
     }
 };
 export const DeleteItem = async (
-    request: express.Request,
-    reponse: express.Response
+    req: Request,
+    reponse: Response
 ) => {
     try {
         const item_id: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(
-            request.body.item_id
+            req.body.item_id
         );
         const item = await itemService._deleteItem(item_id);
         reponse.status(200).json({
@@ -86,8 +85,8 @@ export const DeleteItem = async (
     }
 };
 export const AvailableItems = async (
-    request: express.Request,
-    reponse: express.Response
+    req: Request,
+    reponse: Response
 ) => {
     try {
         const item = await itemService._availableItem();

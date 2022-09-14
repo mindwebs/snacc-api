@@ -4,9 +4,10 @@ import dotenv from "dotenv";
 import userRouter from "./routes/user.route";
 import itemRouter from "./routes/item.route";
 import connectDB from "./config/db.config";
-//initializing
+
+// environment variables
 dotenv.config();
-const port: number = Number(process.env.Port);
+const port: number = Number(process.env.PORT);
 
 const app: express.Application = express();
 

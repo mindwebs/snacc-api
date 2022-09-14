@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 export interface userInterface extends Document {
     name: string;
@@ -24,4 +24,10 @@ export interface UpdateUserInterface {
     password?: string;
     room?: number;
     whatsapp?: string;
+}
+
+export interface JWTPayload {
+    _id: Types.ObjectId,
+    name: string,
+    email: string
 }

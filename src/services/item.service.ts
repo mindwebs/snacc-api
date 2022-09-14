@@ -10,6 +10,7 @@ export const _createItem = async (item_dto: CreateItemInterface) => {
 export const _fetchItem = async (item_id: mongoose.Types.ObjectId) => {
     return await Item.findOne(item_id);
 };
+
 export const _updateItem = async (
     id: mongoose.Types.ObjectId,
     dto: UpdateItemInterface
@@ -20,6 +21,7 @@ export const _updateItem = async (
 export const _deleteItem = async (item_id: mongoose.Types.ObjectId) => {
     return await Item.deleteOne(item_id);
 };
+
 export const _availableItem = async () => {
     return await Item.find({ quantity: { $gt: 0 } });
 };

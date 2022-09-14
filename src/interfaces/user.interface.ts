@@ -19,9 +19,9 @@ export interface CreateUserInterface {
 }
 
 export interface UpdateUserInterface {
-    name: string;
-    email: string;
-    password: string;
-    room: number;
-    whatsapp: string;
+    name?: string;
+    email?: string;
+    password?: string;
+    room?: number;
+    whatsapp?: string;
 }

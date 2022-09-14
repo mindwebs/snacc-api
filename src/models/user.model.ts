@@ -5,13 +5,12 @@ const userSchema: mongoose.Schema<userInterface> = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-
     },
-    email:  {
+    email: {
         type: String,
         required: true,
     },
-    password:  {
+    password: {
         type: String,
         required: true,
     },
@@ -19,11 +18,11 @@ const userSchema: mongoose.Schema<userInterface> = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    whatsapp:  {
+    whatsapp: {
         type: String,
         required: true,
     },
-    collegeId:  {
+    collegeId: {
         type: Number,
         required: true,
     },

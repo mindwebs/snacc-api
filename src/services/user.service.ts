@@ -28,3 +28,11 @@ export const _deleteUser = async (user_id: mongoose.Types.ObjectId) => {
 export const _fetchAllUser = async () => {
     return await User.find({});
 };
+
+export const _changePassword= async(email: mongoose.Schema.Types.String, password: mongoose.Schema.Types.String)=>{
+    return await User.findOneAndUpdate({email:email},password);
+};
+
+export const _resetPassword= async(id: mongoose.Types.ObjectId, password: mongoose.Schema.Types.String)=>{
+    return await User.findOneAndUpdate({_id: id},password);
+};

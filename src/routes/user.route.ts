@@ -13,7 +13,6 @@ userRouter.get("/", userController.FetchAll);
 userRouter.post("/login", userController.Login);
 
 userRouter.post("/change-password", Auth, userController.ChangePassword);
-userRouter.post("/forgot-password", userController.ForgotPassword);
-userRouter.post("/reset-password", userController.ResetPassword);
-
+userRouter.post("/forgot-password",Auth, userController.ForgotPassword);
+userRouter.get("/reset-password/:id", userController.ResetPassword)
 export default userRouter;

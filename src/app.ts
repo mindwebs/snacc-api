@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route";
 import itemRouter from "./routes/item.route";
+import mealRouter from "./routes/meal.route";
 import connectDB from "./config/db.config";
 
 // environment variables
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/user", userRouter);
 app.use("/item", itemRouter);
+app.use("/meal", mealRouter);
 
 app.listen(port, () => {
     console.log("server started on port", port);

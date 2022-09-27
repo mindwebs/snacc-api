@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import { genSaltSync, hashSync } from "bcryptjs";
 import { CreateUserInterface, JWTPayload } from "../interfaces/user.interface";
 import { UpdateUserInterface } from "../interfaces/user.interface";
 import * as userService from "../services/user.service";
@@ -41,7 +42,7 @@ export const FetchProfile = async (
         );
         const user = await userService._fetchUser(user_id);
         res.status(200).json({
-            message: "Fetch success",
+            message: "Profile Fetched successfully",
             user,
         });
     } catch (err: unknown) {
@@ -79,9 +80,8 @@ export const Delete = async (
     res: Response
 ) => {
     try {
-        const user_id: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(
-            req.body.user_id
-        );
+        const user_id :mongoose.Types.ObjectId = new mongoose.Types.ObjectId(req.params.id);
+        
         const user = await userService._deleteUser(user_id);
         res.status(200).json({
             message: "delete success",
@@ -157,6 +157,19 @@ export const ChangePassword = async (
     res: Response
 ) => {
     try {
+
+        const { email, old_password, password } = req.body;
+        const user = await userService._fetchUserByEmail(email);
+        if (!user) return res.status(400).json({ "message": "Invalid email"})
+        const passwordMatched = await bcrypt.compare(old_password, user.password);
+        if (!passwordMatched) return res.status(400).json({ "message": "Invalid password"});
+        const salt = genSaltSync(10);
+        const new_password2 : mongoose.Schema.Types.String = new mongoose.Schema.Types.String(hashSync(password, salt));
+        const user1 = await userService._changePassword(email, new_password2);
+        res.status(200).json({
+            message: "Update success",
+            user1,
+        });
     } catch (err: unknown) {
         res.status(500).json({
             message: "Internal Server Error",
@@ -170,6 +183,11 @@ export const ForgotPassword = async (
     res: Response
 ) => {
     try {
+        const { email } = req.body;
+        const user = await userService._fetchUserByEmail(email);
+        if (!user) return res.status(400).json({ "message": "Invalid email"})
+        // nodemailer code goes here
+
     } catch (err: unknown) {
         res.status(500).json({
             message: "Internal Server Error",
@@ -183,6 +201,19 @@ export const ResetPassword = async (
     res: Response
 ) => {
     try {
+        const user_id :mongoose.Types.ObjectId = new mongoose.Types.ObjectId(req.params.id)
+        const user = await userService._fetchUser(user_id);
+        if (!user) return res.status(400).json({ "message": "Invalid ID"})
+        const password = req.body.password;
+        const salt = genSaltSync(10);
+        const new_password2 : mongoose.Schema.Types.String = new mongoose.Schema.Types.String(hashSync(password, salt));
+        const user1 = await userService._resetPassword(user_id, new_password2);
+        res.status(200).json({
+            message: "Update success",
+            user1,
+        });
+
+
     } catch (err: unknown) {
         res.status(500).json({
             message: "Internal Server Error",
